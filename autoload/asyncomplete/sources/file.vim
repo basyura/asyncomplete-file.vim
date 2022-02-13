@@ -51,7 +51,9 @@ function! asyncomplete#sources#file#completor(opt, ctx)
   let l:matches  = map(l:files, {key, val -> s:filename_map(l:pre, val)})
   let l:matches  = sort(l:matches, function('s:sort'))
 
-  call asyncomplete#complete(a:opt['name'], a:ctx, l:startcol, l:matches)
+  if len(l:matches) > 0
+    call asyncomplete#complete(a:opt['name'], a:ctx, l:startcol, l:matches)
+  end
 endfunction
 
 function! asyncomplete#sources#file#get_source_options(opts)
